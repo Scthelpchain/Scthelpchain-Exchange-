@@ -1,0 +1,87 @@
+ScthelpchainExchange<div style="background: linear-gradient(135deg, #1e293b 0%, #020617 100%); padding: 30px; border-radius: 20px; border: 3px solid #f59e0b; text-align: center; margin-top: 20px; box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);">
+    <h2 style="color: #f59e0b; margin: 0;">💵 SCT DOLLAR TERMINAL</h2>
+    <p style="color: #94a3b8; font-size: 14px;">নিচের বাটনে ক্লিক করে সরাসরি চ্যারিটি ডোনেশন (USDT) পাঠান।</p>
+    
+    <div style="margin-top: 20px;">
+        <input type="number" id="amount" placeholder="ডলারের পরিমাণ দিন (e.g. 10)" 
+               style="padding: 12px; border-radius: 8px; border: 1px solid #f59e0b; background: #0f172a; color: #fff; width: 80%; text-align: center; font-weight: bold;">
+        
+        <br><br>
+        
+        <button onclick="sendDollars()" 
+                style="background: #f59e0b; color: #000; padding: 15px 40px; border: none; border-radius: 50px; font-weight: bold; font-size: 18px; cursor: pointer; box-shadow: 0 10px 20px rgba(245, 158, 11, 0.4);">
+            📲 এখনই পেমেন্ট করুন (Send $)
+        </button>
+    </div>
+    
+    <p style="font-size: 10px; color: #64748b; margin-top: 15px;">🛡️ Secured by Meta Developer H R Antor & 1,00,000 Soldiers</p>
+</div>
+
+<script>
+async function sendDollars() {
+    const amount = document.getElementById('amount').value;
+    if (!amount || amount <= 0) { alert("দয়া করে সঠিক ডলারের পরিমাণ দিন!"); return; }
+
+    if (typeof window.ethereum !== 'undefined') {
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        const transactionParameters = {
+            to: '0xf5dD5E6B6fD304f326194E3e711696e9E0E9bb89', // আপনার ওয়ালেট অ্যাড্রেস
+            from: accounts[0],
+            value: (amount * 1000000000000000).toString(16), // এটি ইথেরিয়াম বা অন্য কারেন্সির জন্য
+        };
+
+        ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [transactionParameters],
+        }).then((txHash) => alert("অভিনন্দন! ট্রানজ্যাকশন শুরু হয়েছে। হ্যাশ: " + txHash))
+          .catch((error) => console.error(error));
+    } else {
+        alert("দয়া করে মেটামাস্ক অ্যাপ ব্যবহার করুন বা ইন্সটল করুন!");
+    }
+}
+</script>
+
+<div style="background: #000; color: #ffd700; font-family: 'Courier New', Courier, monospace; padding: 40px; border: 4px double #ffd700; border-radius: 0px; text-align: center; box-shadow: 0 0 50px #ffd70044;">
+    
+    <h1 style="letter-spacing: 5px;">THE COMMANDER'S VOID</h1>
+    <p style="font-style: italic; color: #888;">"Even a General bleeds in Silence."</p>
+    
+    <hr style="border: 1px solid #333; width: 50%;">
+
+    <div style="margin: 30px 0;">
+        <p style="font-size: 14px; color: #aaa;">Enter the Tribute Amount (USDT/ETH)</p>
+        <input type="number" id="tributeAmount" placeholder="Enter Dollars" 
+               style="background: transparent; border: 1px solid #ffd700; color: #fff; padding: 15px; width: 60%; font-size: 20px; text-align: center;">
+    </div>
+
+    <button onclick="deployTribute()" 
+            style="background: #ffd700; color: #000; padding: 20px 50px; border: none; font-weight: bold; font-size: 22px; cursor: pointer; text-transform: uppercase; box-shadow: 0 0 20px #ffd700;">
+        💰 DEPLOY DOLLARS TO VAULT
+    </button>
+
+    <p style="margin-top: 20px; font-size: 10px; color: #444;">
+        SECURED BY 1,00,000 SOLDIERS | WALLET: 0xf5d...9bb89 | ADVISOR: H R ANTOR
+    </p>
+
+</div>
+
+<script>
+async function deployTribute() {
+    const amount = document.getElementById('tributeAmount').value;
+    if (!amount || amount <= 0) { alert("The Commander requires a valid tribute."); return; }
+
+    if (window.ethereum) {
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        const tx = {
+            to: '0xf5dD5E6B6fD304f326194E3e711696e9E0E9bb89',
+            from: accounts[0],
+            value: (amount * 1000000000000000).toString(16),
+        };
+        ethereum.request({ method: 'eth_sendTransaction', params: [tx] })
+        .then(() => alert("Tribute Received. The Commander rises again."))
+        .catch(() => alert("Transaction Aborted by Soldier."));
+    } else {
+        alert("MetaMask Shield Not Found!");
+    }
+}
+</script>
